@@ -94,7 +94,7 @@ const About = () => {
             <div className={styles.missionCard}>
               <h3>Get Started</h3>
               <p>Call us or browse listings online — we’ll match you with properties that fit your life and budget.</p>
-              <a className={styles.primaryLink} href="tel:+0000000000">Call: +00 000 000</a>
+              <a className={styles.primaryLink} href="tel:+94717876867">Call: +94 71 7876867</a>
             </div>
           </div>
         </section>

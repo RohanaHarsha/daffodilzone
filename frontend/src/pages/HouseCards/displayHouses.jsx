@@ -18,7 +18,7 @@ const HouseDisplay = () => {
   const fetchHouses = useCallback(() => {
     if (!houseType) return;
     axios
-      .get(`https://daffodilzone-b-end.onrender.com/house/displayHouses/${houseType}`)
+      .get(`http://127.0.0.1:5000/house/displayHouses/${houseType}`)
       .then((response) => {
         setFilteredHouses(response.data); // Set all houses initially
       })
@@ -35,7 +35,7 @@ const HouseDisplay = () => {
         setSearching(true);
         try {
           const res = await axios.get(
-            `https://daffodilzone-b-end.onrender.com/house/displayHouses/search?q=${encodeURIComponent(qParam)}`
+            `http://127.0.0.1:5000/house/displayHouses/search?q=${encodeURIComponent(qParam)}`
           );
           setFilteredHouses(res.data || []);
           setQuery(qParam);
@@ -76,8 +76,8 @@ const HouseDisplay = () => {
       const q = (query || "").trim();
       // if empty query, reload default list for the current houseType
       const url = q
-        ? `https://daffodilzone-b-end.onrender.com/house/displayHouses/search?q=${encodeURIComponent(q)}`
-        : `https://daffodilzone-b-end.onrender.com/house/displayHouses/${houseType}`;
+        ? `http://127.0.0.1:5000/house/displayHouses/search?q=${encodeURIComponent(q)}`
+        : `http://127.0.0.1:5000/house/displayHouses/${houseType}`;
       const res = await axios.get(url);
       updateFilteredHouses(res.data);
       // update URL when user searches from this page
@@ -136,7 +136,7 @@ const HouseDisplay = () => {
               } = house;
               const imgSrc =
                 images && images.length > 0 && images[0].image1
-                  ? `https://daffodilzone-b-end.onrender.com/static/uploads/${images[0].image1}`
+                  ? `http://127.0.0.1:5000/static/uploads/${images[0].image1}`
                   : placeholderSvg;
 
               return (

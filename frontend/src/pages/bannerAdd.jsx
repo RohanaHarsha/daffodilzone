@@ -21,7 +21,7 @@ const AddBannerForm = () => {
 
   const fetchImages = () => {
     axios
-      .get("https://daffodilzone-b-end.onrender.com/banner/displayBanner")
+      .get("http://127.0.0.1:5000/banner/displayBanner")
       .then((res) => setImages(res.data))
       .catch((err) => console.error("Error fetching images", err));
   };
@@ -55,7 +55,7 @@ const AddBannerForm = () => {
     formData.append("description", description);
 
     axios
-      .post("https://daffodilzone-b-end.onrender.com/banner/addBanner", formData)
+      .post("http://127.0.0.1:5000/banner/addBanner", formData)
       .then((res) => {
         if (res.status === 201) {
           setResponseMsg({
@@ -80,7 +80,7 @@ const AddBannerForm = () => {
 
   const deleteImage = (id) => {
     axios
-      .delete(`https://daffodilzone-b-end.onrender.com/banner/deleteBanner/${id}`)
+      .delete(`http://127.0.0.1:5000/banner/deleteBanner/${id}`)
       .then((res) => {
         if (res.status === 200) fetchImages();
       })
@@ -143,7 +143,7 @@ const AddBannerForm = () => {
                 <td>{img.description}</td>
                 <td>
                   <img
-                    src={`https://daffodilzone-b-end.onrender.com/static/uploads/${img.title}`}
+                    src={`http://127.0.0.1:5000/static/uploads/${img.title}`}
                     style={{ width: "100px" }}
                     alt="Banner"
                   />

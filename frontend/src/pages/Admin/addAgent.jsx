@@ -21,7 +21,7 @@ export default function AddAgent() {
   });
 
   const fetchAgents = () => {
-    axios.get('https://daffodilzone-b-end.onrender.com/agent/displayAgents')
+    axios.get('http://127.0.0.1:5000/agent/displayAgents')
       .then((response) => {
         setAgents(response.data);
       })
@@ -44,7 +44,7 @@ export default function AddAgent() {
 
   const deleteAgent = (id) => {
     if (window.confirm('Are you sure you want to remove this Agent?')) {
-      axios.delete(`https://daffodilzone-b-end.onrender.com/agent/deleteAgent/${id}`)
+      axios.delete(`http://127.0.0.1:5000/agent/deleteAgent/${id}`)
         .then((response) => {
           if (response.status === 200) {
             fetchAgents();
@@ -79,7 +79,7 @@ export default function AddAgent() {
         password,
       };
 
-      axios.post('https://daffodilzone-b-end.onrender.com/agent/addAgent', data)
+      axios.post('http://127.0.0.1:5000/agent/addAgent', data)
         .then((response) => {
           if (response.status === 201) {
             setResponseMsg({
