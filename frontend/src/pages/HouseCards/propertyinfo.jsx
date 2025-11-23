@@ -6,6 +6,11 @@ import { useParams } from "react-router-dom";
 import Navbar from "../../components/common/navbar";
 import PopupModal from "./PopupModal";
 import Footer from "../../components/Footer/footer";
+import config from "../../config";
+
+
+
+
 import {
   Dialog,
   DialogTitle,
@@ -16,11 +21,14 @@ import {
 } from "@mui/material";
 import defimg from "../../img/1st.jpg";
 
+const API_URL = config.API_URL;
+
+
 const safeImage = (imgObj, key) => {
   if (!imgObj) return null;
   const val = imgObj[key];
   if (!val) return null;
-  return `http://127.0.0.1:5000/static/uploads/${val}`;
+  return `${API_URL}/static/uploads/${val}`;
 };
 
 export default function PropertyInfoPage() {
@@ -44,7 +52,7 @@ export default function PropertyInfoPage() {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const res = await axios.post("http://127.0.0.1:5000/house/displayHouse", { id });
+        const res = await axios.post(`${API_URL}/house/displayHouse`, { id });
         setHouse(res.data || null);
         // set a sensible active thumb
         const first = res.data?.images?.[0];
@@ -94,7 +102,7 @@ export default function PropertyInfoPage() {
       return;
     }
     try {
-      await axios.post("http://127.0.0.1:5000/booking/addBooking", {
+      await axios.post(`${API_URL}/booking/addBooking`, {
         house_id: house.id,
         user_id: userId,
         booking_date: bookingDate,

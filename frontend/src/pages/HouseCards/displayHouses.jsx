@@ -5,6 +5,9 @@ import { useParams, useNavigate, useLocation } from "react-router-dom";
 import Navbar from "../../components/common/navbar";
 import LatestProjects from "../../components/LatestProjects";
 import Footer from "../../components/Footer/footer";
+import config from "../../config";
+
+const API_URL = config.API_URL;
 
 const HouseDisplay = () => {
   const { houseType } = useParams(); // Get houseType from URL params
@@ -18,7 +21,7 @@ const HouseDisplay = () => {
   const fetchHouses = useCallback(() => {
     if (!houseType) return;
     axios
-      .get(`http://127.0.0.1:5000/house/displayHouses/${houseType}`)
+      .get(`${API_URL}/house/displayHouses/${houseType}`)
       .then((response) => {
         setFilteredHouses(response.data); // Set all houses initially
       })
@@ -35,7 +38,7 @@ const HouseDisplay = () => {
         setSearching(true);
         try {
           const res = await axios.get(
-            `http://127.0.0.1:5000/house/displayHouses/search?q=${encodeURIComponent(qParam)}`
+            `${API_URL}/house/displayHouses/search?q=${encodeURIComponent(qParam)}`
           );
           setFilteredHouses(res.data || []);
           setQuery(qParam);
@@ -76,8 +79,8 @@ const HouseDisplay = () => {
       const q = (query || "").trim();
       // if empty query, reload default list for the current houseType
       const url = q
-        ? `http://127.0.0.1:5000/house/displayHouses/search?q=${encodeURIComponent(q)}`
-        : `http://127.0.0.1:5000/house/displayHouses/${houseType}`;
+        ? `${API_URL}/house/displayHouses/search?q=${encodeURIComponent(q)}`
+        : `${API_URL}/house/displayHouses/${houseType}`;
       const res = await axios.get(url);
       updateFilteredHouses(res.data);
       // update URL when user searches from this page
@@ -136,7 +139,7 @@ const HouseDisplay = () => {
               } = house;
               const imgSrc =
                 images && images.length > 0 && images[0].image1
-                  ? `http://127.0.0.1:5000/static/uploads/${images[0].image1}`
+                  ? `${API_URL}/static/uploads/${images[0].image1}`
                   : placeholderSvg;
 
               return (

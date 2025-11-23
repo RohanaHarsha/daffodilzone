@@ -1,7 +1,10 @@
 import React from "react";
 import axios from "axios";
 import "../HouseCards/HouseCards.css";
+import config from "../../config";
 import { useNavigate } from "react-router-dom";
+
+const API_URL = config.API_URL;
 
 const RecentCard = () => {
   const [houses, setHouses] = React.useState([]);
@@ -13,7 +16,7 @@ const RecentCard = () => {
 
   const fetchHouses = () => {
     axios
-      .get("http://127.0.0.1:5000/app/displayRecentCard")
+      .get(`${API_URL}/app/displayRecentCard`)
       .then((response) => setHouses(response.data))
       .catch((error) => console.error("Error fetching recent houses", error));
   };
@@ -30,7 +33,7 @@ const RecentCard = () => {
           const { id, district, houseType, images = [], keyWord } = house;
           const imgSrc =
             images && images.length > 0 && images[0].image1
-              ? `http://127.0.0.1:5000/static/uploads/${images[0].image1}`
+              ? `${API_URL}/static/uploads/${images[0].image1}`
               : placeholderSvg;
 
           return (

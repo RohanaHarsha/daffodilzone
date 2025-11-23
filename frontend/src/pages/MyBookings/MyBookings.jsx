@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import Navbar from '../../components/common/navbar';
 import Table from 'react-bootstrap/Table';
-import '../AddHouse.css'; // Assuming you have a CSS file for additional styling
+import '../AddHouse.css'; 
+import config from '../../config'
+
+const API_URL = config.API_URL;
 
 class MyBookings extends Component {
     constructor(props) {
@@ -25,7 +28,7 @@ class MyBookings extends Component {
     }
 
     fetchBookings = (sessionUserId) => {
-        axios.get(`http://127.0.0.1:5000/getBookingDetailsByUser/${sessionUserId}`)
+        axios.get(`${API_URL}/getBookingDetailsByUser/${sessionUserId}`)
             .then((response) => {
                 console.log('Booking details:', response.data);
                 this.setState({ bookings: response.data });

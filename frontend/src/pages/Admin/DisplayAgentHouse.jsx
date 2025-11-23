@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Table } from "react-bootstrap";
 import Navbar from "../../components/AdminNavbar";
+import config from "../../config";
+
+const API_URL = config.API_URL;
 
 const DisplayHouse = () => {
   const [houses, setHouses] = useState([]);
@@ -12,7 +15,7 @@ const DisplayHouse = () => {
 
   const fetchHouses = () => {
     axios
-      .get("http://127.0.0.1:5000/auth/displayAllAgentHouse")
+      .get(`${API_URL}/auth/displayAllAgentHouse`)
       .then((response) => {
         setHouses(response.data);
       })
@@ -68,7 +71,7 @@ const DisplayHouse = () => {
           const fileName = house.images[i].image1;
           if (!fileName) continue;
 
-          const fileUrl = `http://127.0.0.1:5000/static/uploads/${fileName}`;
+          const fileUrl = `${API_URL}/static/uploads/${fileName}`;
           const response = await fetch(fileUrl);
           const blob = await response.blob();
 
@@ -77,7 +80,7 @@ const DisplayHouse = () => {
       }
 
       const uploadResponse = await axios.post(
-        "http://127.0.0.1:5000/house/addLuxuryHouse",
+        `${API_URL}/house/addLuxuryHouse`,
         formData,
         { headers: { "Content-Type": "multipart/form-data" } }
       );
@@ -91,7 +94,7 @@ const DisplayHouse = () => {
         message: `A new house has been added:\n\n${houseDetails}`,
       };
 
-      await axios.post("http://127.0.0.1:5000/send_email", emailData);
+      await axios.post(`${API_URL}/send_email`, emailData);
 
       alert("House submitted & email sent!");
     } catch (err) {
@@ -135,7 +138,7 @@ const DisplayHouse = () => {
               <td>
                 {house.images?.[0]?.image1 ? (
                   <img
-                    src={`http://127.0.0.1:5000/static/uploads/${house.images[0].image1}`}
+                    src={`${API_URL}/static/uploads/${house.images[0].image1}`}
                     alt="House"
                     style={{ width: "100px", borderRadius: "5px" }}
                   />

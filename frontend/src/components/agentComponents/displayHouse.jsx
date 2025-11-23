@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Table } from 'react-bootstrap'; // Assuming you are using react-bootstrap for styling
+import config from "../../config";
+import { Table } from 'react-bootstrap'; 
+
+const API_URL = config.API_URL;
 
 const DisplayHouse = ({ userId }) => {
   const [houses, setHouses] = useState([]);
@@ -88,7 +91,7 @@ const DisplayHouse = ({ userId }) => {
               <td>
                 {house.images && house.images.length > 0 && house.images[0].image1 ? (
                   <img
-                    src={`http://127.0.0.1:5000/static/uploads/${house.images[0].image1}`}
+                    src={`${API_URL}/static/uploads/${house.images[0].image1}`}
                     alt={`House ${index + 1}`}
                     style={{ width: '100px' }}
                   />

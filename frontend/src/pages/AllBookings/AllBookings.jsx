@@ -3,7 +3,8 @@ import axios from 'axios';
 import Navbar from '../../components/AdminNavbar';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
-import '../AddHouse.css'; // Assuming you have a CSS file for additional styling
+import config from "../../config";
+import '../AddHouse.css'; 
 
 class AllBookings extends Component {
     constructor(props) {

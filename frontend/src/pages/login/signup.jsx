@@ -3,6 +3,9 @@ import "./Signup.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../../components/common/navbar";
+import config from "../../config";
+
+const API_URL = config.API_URL;
 
 const Signup = () => {
   const [isSignInActive, setIsSignInActive] = useState(true);
@@ -30,7 +33,7 @@ const Signup = () => {
 
     axios
       .post(
-        "http://127.0.0.1:5000/auth/login",
+        `${API_URL}/auth/login`,
         { email, password },
         { withCredentials: true }
       )
@@ -88,7 +91,7 @@ const Signup = () => {
     setLoading(true);
 
     axios
-      .post("http://127.0.0.1:5000/auth/UsersignUp", {
+      .post(`${API_URL}/auth/UsersignUp`, {
         name,
         email,
         password,

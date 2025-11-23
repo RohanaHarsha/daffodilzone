@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import './LatestProjects.css';
+import config from "../config";
+
+const API_URL = config.API_URL;
 
 class LatestProjects extends Component {
   constructor(props) {
@@ -17,7 +20,7 @@ class LatestProjects extends Component {
 
   // Fetch images from the backend
   fetchImages = () => {
-    axios.get('http://127.0.0.1:5000/banner/displayBanner')
+    axios.get(`${API_URL}/banner/displayBanner`)
       .then(response => {
         this.setState({ images: response.data });
       })
@@ -58,7 +61,7 @@ class LatestProjects extends Component {
           {/* Left preview container */}
           <div className="preview left" onClick={this.goToPrevious}>
             <img
-              src={`http://127.0.0.1:5000/static/uploads/${images[prevIndex].title}`}
+              src={`${API_URL}/static/uploads/${images[prevIndex].title}`}
               alt="Previous Banner"
             />
           </div>
@@ -66,7 +69,7 @@ class LatestProjects extends Component {
           {/* Main banner container */}
           <div className="main-banner">
             <img
-              src={`http://127.0.0.1:5000/static/uploads/${images[activeIndex].title}`}
+              src={`${API_URL}/static/uploads/${images[activeIndex].title}`}
               alt="Active Banner"
             />
           </div>
@@ -74,7 +77,7 @@ class LatestProjects extends Component {
           {/* Right preview container */}
           <div className="preview right" onClick={this.goToNext}>
             <img
-              src={`http://127.0.0.1:5000/static/uploads/${images[nextIndex].title}`}
+              src={`${API_URL}/static/uploads/${images[nextIndex].title}`}
               alt="Next Banner"
             />
           </div>

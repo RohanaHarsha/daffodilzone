@@ -6,7 +6,10 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Table from "react-bootstrap/Table";
 import "./AddHouse.css";
+import config from "../config";
 import Sidebar from "../components/common/sidebar";
+
+const API_URL = config.API_URL;
 
 class AddHouse extends Component {
   constructor(props) {
@@ -47,7 +50,7 @@ class AddHouse extends Component {
 
   fetchHouses = () => {
     axios
-      .get("http://127.0.0.1:5000/house/displayHouses")
+      .get(`${API_URL}/house/displayHouses`)
       .then((response) => {
         console.log("GET /house/displayHouses status:", response.status);
         console.log("GET /house/displayHouses data:", response.data);
@@ -125,7 +128,7 @@ class AddHouse extends Component {
       data.append("price", price);
 
       axios
-        .post("http://127.0.0.1:5000/house/addLuxuryHouse", data)
+        .post(`${API_URL}/house/addLuxuryHouse`, data)
         .then((response) => {
           if (response.status === 200 || response.status === 201) {
             this.setState({
@@ -184,7 +187,7 @@ class AddHouse extends Component {
   deleteImage = (id) => {
     if (window.confirm("Are you sure you want to delete this image?")) {
       axios
-        .delete(`http://127.0.0.1:5000/house/deleteHouse/${id}`)
+        .delete(`${API_URL}/house/deleteHouse/${id}`)
         .then((response) => {
           if (response.status === 200) {
             this.fetchHouses();
@@ -437,7 +440,7 @@ class AddHouse extends Component {
                       house.images.length > 0 &&
                       house.images[0].image1 ? (
                         <img
-                          src={`http://127.0.0.1:5000/static/uploads/${house.images[0].image1}`}
+                          src={`${API_URL}/static/uploads/${house.images[0].image1}`}
                           alt={`House ${index + 1}`}
                           style={{ width: "100px" }}
                         />

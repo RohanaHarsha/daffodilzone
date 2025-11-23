@@ -174,3 +174,118 @@
   .pi-thumbs{ gap:8px; }
   .pi-details-table th{ width: 40%; }
 }
+/* ============================================
+   ADDITIONAL RESPONSIVE BREAKPOINTS
+   ============================================ */
+
+/* Tablet landscape — reduce sidebar rigidity */
+@media (max-width: 900px) {
+  .pi-grid {
+    grid-template-columns: 1fr 300px;
+    gap: 22px;
+  }
+
+  .pi-sidebar {
+    padding: 16px;
+  }
+
+  .pi-main-image {
+    aspect-ratio: 16 / 9;
+  }
+}
+
+/* Tablet portrait */
+@media (max-width: 768px) {
+  .pi-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pi-sidebar {
+    width: 100%;
+    order: 2;
+  }
+
+  .pi-gallery {
+    order: 1;
+  }
+
+  .pi-main-image {
+    aspect-ratio: 16 / 10;
+    max-height: 380px;
+  }
+
+  .pi-details-table th,
+  .pi-details-table td {
+    padding: 7px 8px;
+    font-size: 0.9rem;
+  }
+
+  .pi-actions {
+    flex-wrap: wrap;
+  }
+
+  .pi-call, .pi-book {
+    flex: 1;
+    text-align: center;
+  }
+}
+
+/* Large phones 480–600px (more breathing room) */
+@media (max-width: 600px) {
+  .pi-main-image {
+    aspect-ratio: 16 / 10;
+    min-height: 240px;
+  }
+
+  .pi-thumb {
+    width: 72px;
+    height: 54px;
+  }
+}
+
+/* Small phones */
+@media (max-width: 430px) {
+  .pi-main-image {
+    aspect-ratio: 4 / 3;
+    min-height: 190px;
+  }
+
+  .pi-thumb {
+    width: 64px;
+    height: 48px;
+  }
+
+  .pi-price {
+    font-size: 1.15rem;
+  }
+
+  .pi-description,
+  .pi-location {
+    padding: 10px;
+  }
+
+  .pi-details-table th,
+  .pi-details-table td {
+    font-size: 0.85rem;
+  }
+}
+
+/* Very small devices */
+@media (max-width: 360px) {
+  .pi-thumb {
+    width: 58px;
+    height: 44px;
+  }
+
+  .pi-actions {
+    flex-direction: column;
+  }
+
+  .pi-call, .pi-book {
+    width: 100%;
+  }
+
+  .pi-title {
+    font-size: 1.05rem;
+  }
+}

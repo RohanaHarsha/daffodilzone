@@ -6,6 +6,9 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Table from 'react-bootstrap/Table';
 import './AddHouse.css';
+import config from "../config";
+
+const API_URL = config.API_URL;
 
 class AddHotel extends Component {
   constructor(props) {
@@ -35,7 +38,7 @@ class AddHotel extends Component {
   }
 
   fetchHotels = () => {
-    axios.get('http://127.0.0.1:5000/hotel/displayHotel')
+    axios.get(`${API_URL}/hotel/displayHotel`)
       .then((response) => {
         console.log(response.data);
         this.setState({ hotels: response.data });
@@ -89,7 +92,7 @@ class AddHotel extends Component {
       data.append('distance', distance);
       data.append('keyWord', keyWord);
   
-      axios.post('http://127.0.0.1:5000/hotel/addHotel', data)
+      axios.post(`${API_URL}/hotel/addHotel`, data)
         .then((response) => {
           console.log(response);
           if (response.status === 201) {
@@ -145,7 +148,7 @@ class AddHotel extends Component {
 
   deleteImage = (id) => {
     if (window.confirm('Are you sure you want to delete this?')) {
-      axios.delete(`http://127.0.0.1:5000/deleteHotel/${id}`)
+      axios.delete(`${API_URL}/deleteHotel/${id}`)
         .then((response) => {
           if (response.status === 200) {
             this.fetchHotels();
@@ -323,7 +326,7 @@ class AddHotel extends Component {
                 <td>
                   {hotel.images && hotel.images.length > 0 && hotel.images[0].image1 ? (
                     <img
-                      src={`http://127.0.0.1:5000/static/uploads/${hotel.images[0].image1}`}
+                      src={`${API_URL}/static/uploads/${hotel.images[0].image1}`}
                       alt={`Hotel ${index + 1}`}
                       style={{ width: '100px' }}
                     />
