@@ -1,6 +1,5 @@
 // ...existing code...
 import React from 'react';
-import Heading from '../../components/common/Heading';
 import './Awards.css';
 
 const items = [

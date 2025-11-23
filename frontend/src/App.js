@@ -26,7 +26,7 @@ function App() {
       <Router>
         <Routes>
           <Route exact path="/" element={<Home />} />
-          <Route path="/displayHouses/:houseType" element={<HouseDisplay />} /> {/* Dynamic path */}
+          <Route path="/displayHouses/:houseType" element={<HouseDisplay />} /> 
           <Route path="/bannerAdd" element={<BannerAdd />} />
           <Route path="/addHouse" element={<AddHouse />} />
           <Route path="/login" element={<Login />} />

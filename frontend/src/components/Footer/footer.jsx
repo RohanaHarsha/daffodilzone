@@ -1,6 +1,6 @@
 // Footer.jsx
 import React from "react";
-import footerLogo from "../../img/Logo.jpg";
+import footerLogo from "../../img/Logo.png";
 import "./footer.css";
 
 export default function Footer() {
