@@ -7,7 +7,7 @@ from flask_mail import Message
 
 from models import db, House, HouseImage, PropertyBooking, AgentHouse, AgentHouseImage, Agent
 from schemas import HouseSchema, HouseImageSchema, PropertyBookingSchema, AgentHouseSchema, AgentHouseImageSchema, AgentSchema
-from utils import allowed_file, is_valid_email
+from utils import is_valid_email
 
 main_bp = Blueprint('main', __name__)
 

@@ -7,10 +7,10 @@ bcrypt = Bcrypt()
 # --- STARTING APP CONTEXT ---
 with app.app_context():
     # ✅ Choose which Admin to delete (by username or email)
-    admin_email = 1  # change this to the admin you want to delete
+    admin_email =  'admin@example.com'# change this to the admin you want to delete
 
     # ✅ Fetch the admin from the DB
-    admin_to_delete =Agent.query.filter_by(email=admin_email).first()# Admin.query.filter_by(email=admin_email).first()
+    admin_to_delete =Admin.query.filter_by(email=admin_email).first()# Admin.query.filter_by(email=admin_email).first()
 
     if admin_to_delete:
         print(f"Admin Found: {admin_to_delete.email} — Deleting now...")

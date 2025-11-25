@@ -61,7 +61,7 @@ class LatestProjects extends Component {
           {/* Left preview container */}
           <div className="preview left" onClick={this.goToPrevious}>
             <img
-              src={`${API_URL}/static/uploads/${images[prevIndex].title}`}
+              src={`${API_URL}/static/banners/${images[prevIndex].title}`}
               alt="Previous Banner"
             />
           </div>
@@ -69,7 +69,7 @@ class LatestProjects extends Component {
           {/* Main banner container */}
           <div className="main-banner">
             <img
-              src={`${API_URL}/static/uploads/${images[activeIndex].title}`}
+              src={`${API_URL}/static/banners/${images[activeIndex].title}`}
               alt="Active Banner"
             />
           </div>
@@ -77,7 +77,7 @@ class LatestProjects extends Component {
           {/* Right preview container */}
           <div className="preview right" onClick={this.goToNext}>
             <img
-              src={`${API_URL}/static/uploads/${images[nextIndex].title}`}
+              src={`${API_URL}/static/banners/${images[nextIndex].title}`}
               alt="Next Banner"
             />
           </div>

@@ -75,8 +75,8 @@ const AddBannerForm = () => {
         console.error(err);
         setResponseMsg({
           status: "failed",
-          message: "",
-          error: "Upload failed",
+          message: err,
+          error: "Upload failed"+(err.response?.data?.error || ""),
         });
       });
   };
@@ -146,7 +146,7 @@ const AddBannerForm = () => {
                 <td>{img.description}</td>
                 <td>
                   <img
-                    src={`${API_URL}/static/uploads/${img.title}`}
+                    src={`${API_URL}/static/banners/${img.title}`}
                     style={{ width: "100px" }}
                     alt="Banner"
                   />

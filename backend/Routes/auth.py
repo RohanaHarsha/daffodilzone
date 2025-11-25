@@ -1,17 +1,6 @@
 from flask import Blueprint, jsonify, request, session
-
-#import os
-#from werkzeug.utils import secure_filename
-#from flask_marshmallow import Marshmallow
-#from flask_cors import CORS
 from models import db,Agent, Admin, Customer, User
-#from schemas import admin_schema, agent_schema, customer_schema,
 from flask_bcrypt import Bcrypt
-#import re
-#import logging
-#from datetime import datetime, time
-#from flask_mail import Mail, Message
-
 
 
 auth_bp = Blueprint("auth", __name__)
@@ -40,7 +29,7 @@ def login_user():
         if not user:
             return jsonify({"error": "User not found", "status": "fail"}), 404
 
-        # DB must store hashed passwords, adjust accordingly
+        # DB must store hashed passwords
         if not bcrypt.check_password_hash(user.password, password):
             return jsonify({"error": "Invalid credentials", "status": "fail"}), 401
 

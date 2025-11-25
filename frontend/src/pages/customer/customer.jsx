@@ -1,6 +1,6 @@
 import React from 'react';
 import Navbar from '../customer/nav';
-import HomePageImage1 from '../../img/HomePageImage1.jpg';
+//import HomePageImage1 from '../../img/HomePageImage1.jpg';
 import '../../pages/home.css';
 import Footer from '../../components/Footer/footer';
 import LatestProjects from '../../components/LatestProjects';
@@ -19,7 +19,7 @@ export default function Home() {
           <h1 className='text-on-image'>Explore<br />Your Dream House<br />With Us</h1>
         </div>
       </div>
-        <img className="homePageImage" src={HomePageImage1} alt="" />
+        <img className="homePageImage"  alt="" />
         <form className="filterForm" style={{ borderRadius: '30px', padding: '10px', border: '1px solid #ccc' }}>
           
           <input type="text" placeholder="Search..." style={{ borderRadius: '30px', padding: '8px', width:'100%', border: '1px solid #ccc' }} />

@@ -7,7 +7,7 @@ from config import Config
 
 banner_bp = Blueprint('banner', __name__)
 
-UPLOAD_FOLDER = 'static/uploads'
+BANNER_UPLOAD_FOLDER = 'static/banners'
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'jfif'}
 
 def allowed_file(filename):
@@ -24,8 +24,7 @@ def upload_file():
 
         files = request.files.getlist('files[]')
         description = request.form['description']
-
-        upload_dir = current_app.config.get('UPLOAD_FOLDER', Config.UPLOAD_FOLDER)
+        upload_dir = current_app.config.get('BANNER_UPLOAD_FOLDER', Config.BANNER_UPLOAD_FOLDER)
         os.makedirs(upload_dir, exist_ok=True)
 
         errors = {}
@@ -46,10 +45,12 @@ def upload_file():
             return jsonify({"message": 'Files successfully uploaded', "status": 'success', "files": saved}), 201
         else:
             db.session.rollback()
+            #return print("This is the error ::::::::" + str(e))
             return jsonify({"errors": errors, "status": "fail"}), 400
 
     except Exception as e:
         db.session.rollback()
+        #return print("This is the error ::::::::" + str(e))
         return jsonify({"error": str(e), "status": "fail"}), 500
 
 
@@ -69,9 +70,7 @@ def delete_image(id):
         image = Banner.query.get(id)
         if not image:
             return jsonify({"message": "Image not found", "status": "fail"}), 404
-
-       # os.remove(os.path.join(app.config['UPLOAD_FOLDER'], image.title))
-        os.remove(os.path.join(Config.UPLOAD_FOLDER, image.title))
+        os.remove(os.path.join(Config.BANNER_UPLOAD_FOLDER, image.title))
         db.session.delete(image)
         db.session.commit()
         return jsonify({"message": "Image deleted", "status": "success"}), 200

@@ -57,7 +57,7 @@ export default function PropertyInfoPage() {
         // set a sensible active thumb
         const first = res.data?.images?.[0];
         setActiveThumb(
-          safeImage(first, "image1") ||
+            safeImage(first, "image1") ||
             safeImage(first, "image2") ||
             safeImage(first, "image3") ||
             safeImage(first, "image4") ||

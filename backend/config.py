@@ -1,7 +1,7 @@
 import os
 
 class Config:
-    SQLALCHEMY_DATABASE_URI =  os.environ.get("DATABASE_URL").replace("postgres://", "postgresql://") if os.environ.get("DATABASE_URL") else 'sqlite:///flask.db'
+    SQLALCHEMY_DATABASE_URI =  os.environ.get("DATABASE_URL").replace("postgres://", "postgresql://") if os.environ.get("DATABASE_URL") else 'sqlite:///flaskdb.db'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SECRET_KEY = 'DaffodilZone'
     MAIL_SERVER = 'smtp.gmail.com'
@@ -12,4 +12,6 @@ class Config:
     MAIL_USE_SSL = True
     MAIL_DEFAULT_SENDER = MAIL_USERNAME if MAIL_USERNAME else None
     UPLOAD_FOLDER = 'static/uploads'
+    BANNER_UPLOAD_FOLDER = 'static/banners'
+    HOUSE_UPLOAD_FOLDER = 'static/houses'
     MAX_CONTENT_LENGTH = 16 * 1024 * 1024

@@ -76,7 +76,7 @@ npm start
 
 ## Running the Project
 After following the above steps:
-- The **backend** (Flask) will be running on a local development server (usually `https://daffodilzone-b-end.onrender.com`).
+- The **backend** (Flask) will be running on a local development server (usually `http://127.0.0.1:5000`).
 - The **frontend** (React) will be running on a separate local port (usually `http://localhost:3000`).
 
 ## Project Structure

@@ -32,10 +32,10 @@ with app.app_context():
             name="Default Admin",
             address="N/A",
             NIC=200000000293,
-            email="admin@example.com",
+            email="daffodilzone@gmail.com",
             TP=200000000293,
             username="admin",
-            password=bcrypt.generate_password_hash("admin123").decode("utf-8"),
+            password=bcrypt.generate_password_hash("u8oD-BnTK-PS#D-48N$").decode("utf-8"),
             role="admin"
         )
         db.session.add(admin)
