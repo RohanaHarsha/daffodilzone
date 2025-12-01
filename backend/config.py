@@ -15,3 +15,10 @@ class Config:
     BANNER_UPLOAD_FOLDER = 'static/banners'
     HOUSE_UPLOAD_FOLDER = 'static/houses'
     MAX_CONTENT_LENGTH = 16 * 1024 * 1024
+
+
+class TestingConfig(Config):
+ TESTING = True
+ SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL").replace("postgres://", 
+            "postgresql://") if os.environ.get("DATABASE_URL") else 'sqlite:///flaskdbtest.db'
+    

@@ -128,7 +128,7 @@ class AddHouse extends Component {
       data.append("price", price);
 
       axios
-        .post(`${API_URL}/house/addLuxuryHouse`, data)
+        .post(`${API_URL}/house/`, data)
         .then((response) => {
           if (response.status === 200 || response.status === 201) {
             this.setState({

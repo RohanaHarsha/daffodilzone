@@ -1,4 +1,4 @@
-from flask import Blueprint, app, jsonify, request, current_app
+from flask import Blueprint, jsonify, request, current_app
 import os
 from werkzeug.utils import secure_filename
 from models import db, Banner

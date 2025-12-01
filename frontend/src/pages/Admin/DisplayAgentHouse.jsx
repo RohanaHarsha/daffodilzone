@@ -80,7 +80,7 @@ const DisplayHouse = () => {
       }
 
       const uploadResponse = await axios.post(
-        `${API_URL}/house/addLuxuryHouse`,
+        `${API_URL}/house`,
         formData,
         { headers: { "Content-Type": "multipart/form-data" } }
       );

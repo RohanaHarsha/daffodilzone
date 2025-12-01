@@ -9,7 +9,7 @@ from sqlalchemy import or_
 house_bp = Blueprint('Houses', __name__)
 
 
-@house_bp.route('/addLuxuryHouse', methods=['POST'])
+@house_bp.route('/', methods=['POST'])
 def upload_luxury_house():
     try:
         # Print the form data for debugging
@@ -84,7 +84,7 @@ def upload_luxury_house():
         return {"error": str(e)}, 500
 
 
-@house_bp.route('/displayHouses', methods=['GET'])
+@house_bp.route('/', methods=['GET'])
 def houses():
     try:
         houses = House.query.order_by(House.upload_time.desc()).all()
@@ -94,7 +94,7 @@ def houses():
         return jsonify({"error": str(e), "status": "fail"}), 500
 
 
-@house_bp.route('/displayHouses/<string:houseType>', methods=['GET'])
+@house_bp.route('/<string:houseType>', methods=['GET'])
 def displayHouses(houseType):
     try:
         houses = House.query.filter_by(houseType=houseType).order_by(House.upload_time.desc()).all()
