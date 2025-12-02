@@ -74,6 +74,29 @@ jobs:
         # If you wish to specify custom queries, you can do so here or in a config file.
         # By default, queries listed here will override any specified in a config file.
         # Prefix the list here with "+" to use these queries and those in the config file.
+   
+   
+    #Rohanaharsha Custom script
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+          python-version: 3.11 
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        python -m pip install -r requirements.txt
+
+    - name: Print debugging information
+      run: |
+        echo "Python Version: $(python --version)"
+        echo "Working Directory: $(pwd)"
+        echo "Contents of Working Directory: $(ls -l)"
+        echo "Contents of site-packages: $(ls -l venv/lib/python*/site-packages)"
+
+    - name: Run tests
+      run: python unittest discover -s tests
+         
 
         # For more details on CodeQL's query packs, refer to: https://docs.github.com/en/code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/configuring-code-scanning#using-queries-in-ql-packs
         # queries: security-extended,security-and-quality
