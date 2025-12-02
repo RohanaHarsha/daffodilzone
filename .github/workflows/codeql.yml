@@ -84,7 +84,7 @@ jobs:
 
     - name: Install dependencies
       run: |
-        python -m pip install -r ../backend/requirements.txt 
+        python -m pip install -r backend/requirements.txt 
 
     - name: Print debugging information
       run: |
