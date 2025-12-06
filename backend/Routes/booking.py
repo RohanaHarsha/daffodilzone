@@ -4,6 +4,7 @@ from models import House, PropertyBooking, db
 from schemas import PropertyBookingSchema
 from datetime import datetime, time
 from flask_mail import Mail, Message
+import logging
 
 booking_bp = Blueprint('booking' , __name__)
 
@@ -16,7 +17,8 @@ def get_bookings():
         results = PropertyBookingSchema.dump(all_bookings)
         return jsonify(results), 200
     except Exception as e:
-        return jsonify({"error": str(e), "status": "fail"}), 500
+        logging.exception("Error occurred in get_bookings.")
+        return jsonify({"error": "An internal error has occurred.", "status": "fail"}), 500
 
 @booking_bp.route('/addBooking', methods=['POST','OPTIONS'])
 def add_booking():
@@ -67,8 +69,8 @@ def add_booking():
 
     except Exception as e:
         db.session.rollback()  # Rollback the session on error
-        return jsonify({"error": str(e), "status": "fail"}), 500  # Handle exceptions
-
+        logging.exception("Error occurred in add_booking.")
+        return jsonify({"error": "An internal error has occurred.", "status": "fail"}), 500  # Handle exceptions
 
 
 @booking_bp.route('/getBookingDetails', methods=['GET'])
@@ -101,7 +103,8 @@ def get_booking_details():
         return jsonify(booking_details), 200
 
     except Exception as e:
-        return jsonify({"error": str(e), "status": "fail"}), 500
+        logging.exception("Error occurred in get_booking_details.")
+        return jsonify({"error": "An internal error has occurred.", "status": "fail"}), 500
 
 @booking_bp.route('/getBookingDetailsByUser/<int:user_id>', methods=['GET'])
 def get_booking_details_by_user(user_id):
@@ -133,7 +136,8 @@ def get_booking_details_by_user(user_id):
         return jsonify(booking_details), 200
 
     except Exception as e:
-        return jsonify({"error": str(e), "status": "fail"}), 500
+        logging.exception("Error occurred in get_booking_details_by_user.")
+        return jsonify({"error": "An internal error has occurred.", "status": "fail"}), 500
 
 
 @booking_bp.route('/confirmBooking/<int:booking_id>', methods=['POST'])
