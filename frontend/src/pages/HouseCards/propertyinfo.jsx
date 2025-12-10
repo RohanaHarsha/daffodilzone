@@ -28,7 +28,7 @@ const safeImage = (imgObj, key) => {
   if (!imgObj) return null;
   const val = imgObj[key];
   if (!val) return null;
-  return `${API_URL}/static/uploads/${val}`;
+  return `${API_URL}/static/houses/${val}`;
 };
 
 export default function PropertyInfoPage() {

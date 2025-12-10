@@ -4,31 +4,18 @@ from werkzeug.utils import secure_filename
 from models import db, House, HouseImage
 from schemas import HouseSchema
 from sqlalchemy import or_
+import uuid
 
 
 house_bp = Blueprint('Houses', __name__)
 
 
-@house_bp.route('/', methods=['POST'])
-def upload_luxury_house():
-    try:
-        # Print the form data for debugging
-        print("Form Data:")
-        print(f"houseType: {request.form['houseType']}")
-        print(f"district: {request.form['district'].lower()}")
-        print(f"address: {request.form['address']}")
-        print(f"no_of_rooms: {request.form['no_of_rooms']}")
-        print(f"no_of_bathrooms: {request.form['no_of_bathrooms']}")
-        print(f"land_size: {request.form['land_size']}")
-        print(f"distance: {request.form['distance']}")
-        print(f"storey: {request.form['storey']}")
-        print(f"keyWord: {request.form['keyWord']}")
-        print(f"description: {request.form['description']}")
-        print(f"price: {request.form['price']}")
-        print(f"lat: {request.form['lat']}")
-        print(f"lng: {request.form['lng']}")
 
-        # Retrieve form data
+@house_bp.route('/', methods=['POST'])
+def upload_house():
+  
+    try:
+     
         houseType = request.form['houseType']
         district = request.form['district'].lower()
         address = request.form['address']
@@ -53,16 +40,28 @@ def upload_luxury_house():
         db.session.add(new_house)
         db.session.commit()
 
-        # Handle images and print the file names
+        # Handle images with unique filenames
         print("Handling Images:")
         image_filenames = []
+        upload_folder = current_app.config['HOUSE_UPLOAD_FOLDER']
+        
         for i in range(1, 7):
             image_file = request.files.get(f'image{i}')
-            if image_file:
-                filename = secure_filename(image_file.filename)
-                print(f"Image {i} received: {filename}")
-                image_file.save(os.path.join(current_app.config['UPLOAD_FOLDER'], filename))
-                image_filenames.append(filename)
+            if image_file and image_file.filename:
+                # 2. Extract the file extension
+                original_filename = secure_filename(image_file.filename)
+                file_ext = os.path.splitext(original_filename)[1]
+                
+                # 3. Generate a unique filename using UUID
+                unique_filename = str(uuid.uuid4()) + file_ext
+                
+                print(f"Image {i} received. Saving as: {unique_filename}")
+                
+                # 4. Save the file with the unique name
+                save_path = os.path.join(upload_folder, unique_filename)
+                image_file.save(save_path)
+                
+                image_filenames.append(unique_filename)
             else:
                 print(f"Image {i} not received.")
                 image_filenames.append(None)
@@ -77,14 +76,15 @@ def upload_luxury_house():
         db.session.add(new_image)
         db.session.commit()
 
-        return {"message": "Luxury house added successfully"}, 201
+        return jsonify({"message": "Luxury house added successfully"}), 201
+    
     except Exception as e:
-        print("heyyyy", e)
+        db.session.rollback()
         print(f"Error occurred: {e}")
-        return {"error": str(e)}, 500
+        return jsonify({"error": str(e)}), 500
 
 
-@house_bp.route('/', methods=['GET'])
+@house_bp.route('/displayHouses', methods=['GET'])
 def houses():
     try:
         houses = House.query.order_by(House.upload_time.desc()).all()
@@ -104,6 +104,9 @@ def displayHouses(houseType):
         return jsonify({"error": str(e), "status": "fail"}), 500       
 
 
+import os
+from sqlalchemy import or_
+
 @house_bp.route('/deleteHouse/<int:id>', methods=['DELETE'])
 def delete_house(id):
     try:
@@ -115,23 +118,55 @@ def delete_house(id):
         if not house:
             return jsonify({"error": "House not found"}), 404
 
-        # remove associated image files if any
-        upload_dir = current_app.config.get('UPLOAD_FOLDER', 'static/uploads')
-        images = HouseImage.query.filter_by(house_id=house.id).all()
-        for img in images:
+        # Get associated image records
+        images_to_delete = HouseImage.query.filter_by(house_id=house.id).all()
+        upload_dir = current_app.config.get('HOUSE_UPLOAD_FOLDER', 'static/houses')
+        
+        # Collect all unique filenames associated with the house being deleted
+        filenames_to_check = set()
+        for img in images_to_delete:
             for fname in (img.image1, img.image2, img.image3, img.image4, img.image5, img.image6):
                 if fname:
+                    filenames_to_check.add(fname)
+
+        # --- NEW LOGIC: Conditional File Deletion ---
+        for fname in filenames_to_check:
+            if fname:
+                # Check if *any* other HouseImage record (from any house)
+              
+                count = db.session.query(HouseImage).filter(
+                    or_(
+                        HouseImage.image1 == fname,
+                        HouseImage.image2 == fname,
+                        HouseImage.image3 == fname,
+                        HouseImage.image4 == fname,
+                        HouseImage.image5 == fname,
+                        HouseImage.image6 == fname
+                    )
+                ).count()
+
+                if count == 1: 
                     path = os.path.join(upload_dir, fname)
                     if os.path.exists(path):
+                        current_app.logger.info(f"Deleting unique file: {fname}")
                         os.remove(path)
+                else:
+                    current_app.logger.info(f"Skipping file deletion for: {fname}. Reference count: {count}")
 
+        
+        for img in images_to_delete:
+             db.session.delete(img)
+
+        
         db.session.delete(house)
         db.session.commit()
-        return jsonify({"message": "House deleted successfully"}), 200
+        
+        return jsonify({"message": "House and associated image data deleted successfully"}), 200
+        
     except Exception as e:
         db.session.rollback()
-        return jsonify({"error": str(e)}), 500
-
+        current_app.logger.error(f"Error during house deletion: {e}")
+        return jsonify({"error": "An internal error occurred."}), 500
 
 @house_bp.route('/displayHouse', methods=['POST'])
 def get_house():
@@ -179,7 +214,7 @@ def get_house():
         return jsonify({"error": str(e)}), 500
 
 
-@house_bp.route('/displayHouses/search', methods=['GET'])
+@house_bp.route('/displayHouse/search', methods=['GET'])
 def search_houses():
     try:
         q = (request.args.get('q') or "").strip()

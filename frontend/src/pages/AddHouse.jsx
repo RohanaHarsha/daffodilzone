@@ -440,7 +440,7 @@ class AddHouse extends Component {
                       house.images.length > 0 &&
                       house.images[0].image1 ? (
                         <img
-                          src={`${API_URL}/static/uploads/${house.images[0].image1}`}
+                          src={`${API_URL}/static/houses/${house.images[0].image1}`}
                           alt={`House ${index + 1}`}
                           style={{ width: "100px" }}
                         />

@@ -33,7 +33,7 @@ const RecentCard = () => {
           const { id, district, houseType, images = [], keyWord } = house;
           const imgSrc =
             images && images.length > 0 && images[0].image1
-              ? `${API_URL}/static/uploads/${images[0].image1}`
+              ? `${API_URL}/static/houses/${images[0].image1}`
               : placeholderSvg;
 
           return (
@@ -63,7 +63,7 @@ const RecentCard = () => {
                     onClick={() => handleViewMore(id)}
                     aria-label={`View more about property ${id}`}
                   >
-                    View More
+                    View More 
                   </button>
                 </div>
               </div>
