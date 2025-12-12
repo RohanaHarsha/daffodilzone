@@ -29,7 +29,7 @@ class TestLuxuryHouseUpload(unittest.TestCase):
         response = self.client.get("/", data=form_data)
         print(response)
         self.assertEqual(response.status_code, 200)
-        self.assertIn("Luxury house added successfully")
+        self.assertIn(b"Luxury House uploaded successfully", response.data)
 
 
 if __name__ == "__main__":
