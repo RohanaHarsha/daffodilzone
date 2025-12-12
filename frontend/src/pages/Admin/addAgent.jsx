@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import  { useState, useEffect } from 'react';
 import { Container, Row, Col, Table } from 'reactstrap';
-import Navbar from '../../components/AdminNavbar';
 import axios from 'axios';
 import config from "../../config";
 

@@ -16,7 +16,7 @@ const RecentCard = () => {
 
   const fetchHouses = () => {
     axios
-      .get(`${API_URL}/app/displayRecentCard`)
+      .get(`${API_URL}/house/displayRecentCard`)
       .then((response) => setHouses(response.data))
       .catch((error) => console.error("Error fetching recent houses", error));
   };

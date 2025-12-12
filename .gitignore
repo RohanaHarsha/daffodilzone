@@ -3,6 +3,9 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+#configurations
+frontend/src/config.js
+
 # C extensions
 *.so
 

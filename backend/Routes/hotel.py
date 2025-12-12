@@ -7,7 +7,7 @@ from schemas import HotelSchema
 
 
 
-hotel_bp = Blueprint('hotels', __name__)
+hotel_bp = Blueprint('hotels', __name__,)
 
 @hotel_bp.route('/addHotel', methods=['POST'])
 def upload_hotel():
