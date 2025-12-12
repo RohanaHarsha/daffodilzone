@@ -5,6 +5,9 @@ from models import db, House, HouseImage
 from schemas import HouseSchema
 from sqlalchemy import or_
 import uuid
+from flask import app
+
+
 
 
 house_bp = Blueprint('Houses', __name__)
@@ -84,7 +87,7 @@ def upload_house():
         return jsonify({"error": str(e)}), 500
 
 
-@house_bp.route('/displayHouses', methods=['GET'])
+@house_bp.route('/displayHouse', methods=['GET'])
 def houses():
     try:
         houses = House.query.order_by(House.upload_time.desc()).all()
@@ -94,7 +97,7 @@ def houses():
         return jsonify({"error": str(e), "status": "fail"}), 500
 
 
-@house_bp.route('/<string:houseType>', methods=['GET'])
+@house_bp.route('/displayHouses/<string:houseType>', methods=['GET'])
 def displayHouses(houseType):
     try:
         houses = House.query.filter_by(houseType=houseType).order_by(House.upload_time.desc()).all()
@@ -104,10 +107,9 @@ def displayHouses(houseType):
         return jsonify({"error": str(e), "status": "fail"}), 500       
 
 
-import os
-from sqlalchemy import or_
 
-@house_bp.route('/deleteHouse/<int:id>', methods=['DELETE'])
+
+@house_bp.route('/deleteHouses/<int:id>', methods=['DELETE'])
 def delete_house(id):
     try:
         if not id:
@@ -132,8 +134,6 @@ def delete_house(id):
         # --- NEW LOGIC: Conditional File Deletion ---
         for fname in filenames_to_check:
             if fname:
-                # Check if *any* other HouseImage record (from any house)
-              
                 count = db.session.query(HouseImage).filter(
                     or_(
                         HouseImage.image1 == fname,
@@ -152,23 +152,20 @@ def delete_house(id):
                         os.remove(path)
                 else:
                     current_app.logger.info(f"Skipping file deletion for: {fname}. Reference count: {count}")
-
         
         for img in images_to_delete:
              db.session.delete(img)
 
-        
         db.session.delete(house)
         db.session.commit()
-        
+    
         return jsonify({"message": "House and associated image data deleted successfully"}), 200
-        
     except Exception as e:
         db.session.rollback()
         current_app.logger.error(f"Error during house deletion: {e}")
         return jsonify({"error": "An internal error occurred."}), 500
 
-@house_bp.route('/displayHouse', methods=['POST'])
+@house_bp.route('/info', methods=['POST'])
 def get_house():
     try:
         data = request.get_json()
@@ -214,7 +211,7 @@ def get_house():
         return jsonify({"error": str(e)}), 500
 
 
-@house_bp.route('/displayHouse/search', methods=['GET'])
+@house_bp.route('/displayHouses/search', methods=['GET'])
 def search_houses():
     try:
         q = (request.args.get('q') or "").strip()
@@ -236,4 +233,20 @@ def search_houses():
         return jsonify(results), 200
     except Exception as e:
         current_app.logger.exception("search_houses error")
+        return jsonify({"error": str(e), "status": "fail"}), 500
+    
+@house_bp.route('/displayRecentCard', methods=['GET'])
+def displayRecentCard():
+    try:
+        # Get the recent 6 houses
+        first_six_houses = House.query.order_by(House.upload_time.desc()).limit(6).all()
+
+        # Instantiate schema with many=True
+        schema = HouseSchema(many=True)
+
+        # Serialize the list of house objects
+        results = schema.dump(first_six_houses)
+
+        return jsonify(results), 200
+    except Exception as e:
         return jsonify({"error": str(e), "status": "fail"}), 500

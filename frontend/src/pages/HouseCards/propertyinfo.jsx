@@ -7,18 +7,7 @@ import Navbar from "../../components/common/navbar";
 import PopupModal from "./PopupModal";
 import Footer from "../../components/Footer/footer";
 import config from "../../config";
-
-
-
-
-import {
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-  Button,
-  TextField,
-} from "@mui/material";
+import { Dialog, DialogTitle, DialogContent, DialogActions, Button, TextField, } from "@mui/material";
 import defimg from "../../img/1st.jpg";
 
 const API_URL = config.API_URL;
@@ -52,16 +41,16 @@ export default function PropertyInfoPage() {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const res = await axios.post(`${API_URL}/house/displayHouse`, { id });
+        const res = await axios.post(`${API_URL}/house/info`, { id });
         setHouse(res.data || null);
         // set a sensible active thumb
         const first = res.data?.images?.[0];
         setActiveThumb(
-            safeImage(first, "image1") ||
-            safeImage(first, "image2") ||
-            safeImage(first, "image3") ||
-            safeImage(first, "image4") ||
-            defimg
+          safeImage(first, "image1") ||
+          safeImage(first, "image2") ||
+          safeImage(first, "image3") ||
+          safeImage(first, "image4") ||
+          defimg
         );
       } catch (err) {
         console.error(err);
@@ -158,7 +147,7 @@ export default function PropertyInfoPage() {
           </section>
 
           <aside className="pi-sidebar" aria-labelledby="pi-title">
-           
+
             <p className="pi-sub">Loc {house.district}</p>
 
             <div className="pi-price">MiL {house.price ? Number(house.price).toLocaleString() : "Contact"}</div>
@@ -169,9 +158,9 @@ export default function PropertyInfoPage() {
                 <tr>
                   <th>Storey</th><td>{house.storey || "—"}</td>
                   <th>Land(sqm)</th><td>{house.land_size ? `${house.land_size} ` : "—"}</td>
-                 </tr>
+                </tr>
                 <tr>
-                   <th>Bedrooms</th><td>{house.no_of_rooms || "—"}</td>
+                  <th>Bedrooms</th><td>{house.no_of_rooms || "—"}</td>
                   <th>Bathrooms</th><td>{house.no_of_bathrooms || "—"}</td>
                 </tr>
               </tbody>

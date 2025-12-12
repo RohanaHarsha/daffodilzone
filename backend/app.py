@@ -1,13 +1,10 @@
-from flask import Flask, jsonify, request
-from schemas import HouseSchema
+from flask import Flask
 from config import Config
 from flask_cors import CORS
-from models import House, db
+from models import  db
 from flask_mail import Mail
 from flask_bcrypt import Bcrypt
-import logging
 from flask_cors import CORS
-from flask import current_app
 from models import Admin
 
 
@@ -52,7 +49,7 @@ from Routes.hotel import hotel_bp
 from Routes.auth import auth_bp
 from Routes.main import main_bp  
 from Routes.house import house_bp  
-from schemas import HouseSchema
+
 
 app.register_blueprint(banner_bp, url_prefix="/banner")
 app.register_blueprint(agent_bp, url_prefix="/agent")
@@ -67,86 +64,6 @@ def home():
     return "Welcome to the Real Estate Backend API"
 
 
-@app.route('/displayHouses/<string:houseType>', methods=['GET'])
-def displayHouses(houseType):
-    try:
-        houses = House.query.filter_by(houseType=houseType).order_by(House.upload_time.desc()).all()
-        results = HouseSchema.dump(houses) 
-        return jsonify(results), 200
-    except Exception as e:
-        return jsonify({"error": str(e), "status": "fail"}), 500
-    
-
-
-@app.route('/displayHouse', methods=['POST'])
-def get_house():
-    try:
-        data = request.get_json()
-        print("Request data:", data)  # Log the incoming request data
-
-        # Extract the house ID
-        id = data.get('id')
-
-        house = House.query.filter(House.id==id)
-
-        if not house:
-            return jsonify({"error": "House not found"}), 401
-        
-        house_data =  HouseSchema.dump(house)
-        print("House Data Type:", type(house_data))  # Check the type
-        print("House Data:", house_data)  # Log the data
-
-        # Check if house_data is a list and access the first item if necessary
-        if isinstance(house_data, list) and len(house_data) > 0:
-            house_data = house_data[0]  # Get the first (and only) element
-
-        house_data = {
-            'id': house_data['id'],
-            'address': house_data['address'],
-            'district': house_data['district'],
-            'houseType': house_data['houseType'],
-            'no_of_rooms': house_data['no_of_rooms'],
-            'no_of_bathrooms': house_data['no_of_bathrooms'],
-            'land_size': house_data['land_size'],
-            'distance': house_data['distance'],
-            'storey': house_data['storey'],
-            'keyWord': house_data['keyWord'],
-            'description': house_data['description'],
-            'price': house_data['price'],
-            'lat': house_data['lat'],
-            'lng': house_data['lng'],
-            'images':  [
-                {
-                    'image1': img['image1'],
-                    'image2': img['image2'],
-                    'image3': img['image3'],
-                    'image4': img['image4'],
-                    'image5': img['image5'], 
-                    'image6': img['image6']
-                }
-                for img in house_data['images']
-            ]
-        }
-        print("housedata: ", house_data)
-        return jsonify(house_data), 200
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
-        
-@app.route('/app/displayRecentCard', methods=['GET'])
-def displayRecentCard():
-    try:
-        # Get the recent 6 houses
-        first_six_houses = House.query.order_by(House.upload_time.desc()).limit(6).all()
-
-        # Instantiate schema with many=True
-        schema = HouseSchema(many=True)
-
-        # Serialize the list of house objects
-        results = schema.dump(first_six_houses)
-
-        return jsonify(results), 200
-    except Exception as e:
-        return jsonify({"error": str(e), "status": "fail"}), 500
 
 if __name__ == '__main__':
    app.run(debug=True)
