@@ -7,9 +7,7 @@ import AddHouse from './pages/AddHouse';
 import About from './pages/About/About';
 import Login from './pages/login/signup';
 import Layout from "./components/common/layout";
-import Hotels from './pages/hotels'
 import AdminHome from './pages/Admin/AdminHome';
-import Lands from './pages/Lands'
 import HouseDisplay from './pages/HouseCards/displayHouses';
 import AddAgent from './pages/Admin/addAgent';
 import AgentHome from './pages/AgentPage/AgentHome';
@@ -32,8 +30,6 @@ function App() {
           <Route path="/login" element={<Login />} />
 
           <Route path="/AdminHome" element={<AdminHome />} />
-          <Route path="/Hotel" element={<Hotels />} />
-          <Route path="/Lands" element={<Lands />} />
           <Route path="/about" element={<About />} />
           <Route path="/logout" element={<Home />} />
           <Route path="/" element={<Layout />}>
