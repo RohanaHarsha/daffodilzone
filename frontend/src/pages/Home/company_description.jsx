@@ -18,7 +18,6 @@ const fetchItem = () => {
       });
   };
 
-
 const addImage = (imageData) => {
     axios.post(`${API_URL}/main/upload_image`, imageData)
       .then((response) => {
