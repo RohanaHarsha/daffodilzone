@@ -163,6 +163,23 @@ class AgentHouseImage(db.Model):
     house_id = db.Column(db.Integer, db.ForeignKey('agent_houses.id'))
     house = db.relationship('AgentHouse', back_populates='images')
 
+# ─────────────────────────────
+# Homepage video and images
+# ─────────────────────────────
+class HomePageVideo(db.Model):
+    __tablename__ = "homepage_video"
+    id = db.Column(db.Integer, primary_key=True)
+    video_url = db.Column(db.String(255))
+    
+
+class HomePageImage(db.Model):
+    __tablename__ = "homepage_images"
+    id = db.Column(db.Integer, primary_key=True)
+    image1 = db.Column(db.String(255))
+    image2 = db.Column(db.String(255))
+    image3 = db.Column(db.String(255))
+
+
 
 # ─────────────────────────────
 # Bookings & Appointments

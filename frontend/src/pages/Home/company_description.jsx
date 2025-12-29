@@ -9,40 +9,40 @@ import config from "../../config";
 const API_URL = config.API_URL;
 
 const fetchItem = () => {
-    axios.get(`${API_URL}/main/get_items`)
-      .then((response) => { 
-        console.log(response.data);
-      })
-      .catch((error) => {
-        console.error('Error fetching items:', error);
-      });
-  };
+  axios.get(`${API_URL}/main/get_image`)
+    .then((response) => {
+      console.log(response.data);
+    })
+    .catch((error) => {
+      console.error('Error fetching items:', error);
+    });
+};
 
 const addImage = (imageData) => {
-    axios.post(`${API_URL}/main/upload_image`, imageData)
+  axios.post(`${API_URL}/main/upload_image`, imageData)
+    .then((response) => {
+      if (response.status === 201) {
+        console.log('Image successfully uploaded');
+      }
+    })
+    .catch((error) => {
+      console.error('There was an error uploading the image!', error);
+    });
+};
+
+const deleteImage = (id) => {
+  if (window.confirm('Are you sure you want to remove this image?')) {
+    axios.delete(`${API_URL}/main/delete_image/${id}`)
       .then((response) => {
-        if (response.status === 201) {
-          console.log('Image successfully uploaded');
+        if (response.status === 200) {
+          fetchItem();
         }
       })
       .catch((error) => {
-        console.error('There was an error uploading the image!', error);
+        console.error("There was an error deleting the image!", error);
       });
-  };
-
-const deleteImage = (id) => {
-    if (window.confirm('Are you sure you want to remove this Agent?')) {
-      axios.delete(`${API_URL}/agent/deleteAgent/${id}`)
-        .then((response) => {
-          if (response.status === 200) {
-            fetchItem();
-          }
-        })
-        .catch((error) => {
-          console.error("There was an error deleting the agent!", error);
-        });
-    }
-  };
+  }
+};
 
 const handleEdit = () => {
   // Placeholder for edit functionality
@@ -55,6 +55,7 @@ const CompanyDescription = () => {
       </div>
       <div className="company-grid">
         <div className="grid-item">
+
           <img src={Renovate1} alt="Renovation 1" />
         </div>
         <div className="grid-item">
