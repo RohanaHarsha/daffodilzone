@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Signup.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -17,6 +17,8 @@ const Signup = () => {
   const [username, setUsername] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+
+
 
   const togglePanel = () => {
     setIsSignInActive(!isSignInActive);
@@ -72,7 +74,21 @@ const Signup = () => {
           alert("Login failed. Try again.");
         }
       });
+
+
   };
+
+
+  // ------------------- GET USER EMAIL -------------------
+  useEffect(() => {
+    if (email) {
+      localStorage.setItem("userEmail", email);
+    }
+  }, [email]);
+
+
+
+
 
   // ------------------- SIGN UP -------------------
   const handleSignUp = (e) => {
@@ -112,6 +128,8 @@ const Signup = () => {
       })
       .finally(() => setLoading(false));
   };
+
+
 
   return (
     <div className="back">

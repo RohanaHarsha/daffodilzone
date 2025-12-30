@@ -48,6 +48,10 @@ const handleEdit = () => {
   // Placeholder for edit functionality
 }
 
+const userEmail = localStorage.getItem("userEmail");
+console.log("Admin Email: ", userEmail);
+
+
 const CompanyDescription = () => {
   return (
     <div className="company-description">
@@ -61,6 +65,16 @@ const CompanyDescription = () => {
         <div className="grid-item">
           <img src={Renovate2} alt="Renovation 2" />
         </div>
+
+
+
+        {userEmail === "daffodilzone@gmail.com" && (
+          <button onClick={handleEdit} className="edit-button">
+            Edit
+          </button>
+        )}
+
+
         <div className="grid-item">
           <img src={Renovate3} alt="Renovation 3" />
         </div>

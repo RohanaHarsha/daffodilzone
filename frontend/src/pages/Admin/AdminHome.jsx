@@ -12,13 +12,18 @@ import AddHouse from '../AddHouse';
 export default function Home() {
     const [showBannerForm, setShowBannerForm] = useState(false);
     const toggleBannerForm = () => setShowBannerForm(prev => !prev);
-    
+
     const [showHouseForm, setShowHouseForm] = useState(false);
     const toggleHouseForm = () => setShowHouseForm(prev => !prev);
 
+
+    
+
+
+
     return (
         <div className="page-with-sidebar">
-         
+
             <Sidebar />
 
             <div className="page-content">
