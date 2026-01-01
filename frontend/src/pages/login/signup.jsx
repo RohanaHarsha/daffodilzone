@@ -129,9 +129,35 @@ const Signup = () => {
       .finally(() => setLoading(false));
   };
 
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  const handleVerify = async () => {
+    try {
+      // Send the email captured from your UI to the Flask backend
+      const response = await axios.post(`${API_URL}/auth/verify-admin`, {
+        email: email
+      });
+
+      // Update state based on the backend response
+      setIsAdmin(response.data.isAdmin);
+
+      if (response.data.isAdmin) {
+        alert("Access Granted");
+      } else {
+        alert("Access Denied");
+      }
+    } catch (error) {
+      console.error("Verification failed:", error);
+    }
+  };
+
+  localStorage.setItem("isAdmin", isAdmin);
+
+  console.log("Is Admin:", isAdmin);
 
 
   return (
+
     <div className="back">
       <Navbar />
       <div
@@ -226,7 +252,7 @@ const Signup = () => {
               <p className="p">
                 To keep connected with us please login with your personal info
               </p>
-              <button className="ghost" id="signIn" onClick={togglePanel}>
+              <button className="ghost" id="signIn" onClick={{togglePanel,handleVerify}}>
                 Sign In
               </button>
             </div>

@@ -5,6 +5,7 @@ import Renovate3 from '../../img/Renovate3.jpg';
 import './CompanyDescription.css';
 import axios from 'axios';
 import config from "../../config";
+import { useState } from 'react';
 
 const API_URL = config.API_URL;
 
@@ -51,16 +52,8 @@ const handleEdit = () => {
   // Placeholder for edit functionality
 }
 
-//this is for fething the admin email from session storage
-const fetchAdmin = () => {
-  axios.get(`${API_URL}/auth/fetchadmin`)
-    .then((response) => {
-      console.log(response.data);
-    })
-    .catch((error) => {
-      console.error('Error fetching admin email:', error);
-    });
-}
+//this is for fething and sending the admin email from session storage
+
 
 const email = localStorage.getItem("userEmail");
 console.log("Admin Email:", email);
@@ -71,6 +64,7 @@ console.log("Admin Email:", email);
 
 
 const CompanyDescription = () => {
+ 
   return (
     <div className="company-description">
       <div className="description-text">

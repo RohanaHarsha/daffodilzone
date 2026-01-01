@@ -121,7 +121,7 @@ def signUp():
         return "An internal error has occurred!"
     
 #fetch all admins
-@auth_bp.route('/verify-admin', methods=['POST'])
+@auth_bp.route('/verify_admin', methods=['POST'])
 def fetchadmin():
     try:
         data = request.get_json()
@@ -142,7 +142,7 @@ def fetchadmin():
             return jsonify({"error": "Admin not found", "status": "fail"}), 404
         else:
             return jsonify({
-                "message": "Admin verified",
+                "isAdmin": True,
                 "status": "success"
             }), 200
 
