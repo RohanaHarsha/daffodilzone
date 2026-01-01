@@ -49,7 +49,6 @@ def login_user():
         return jsonify({"error": "Server error", "status": "fail"}), 500
 
 
-
 @auth_bp.route('/UsersignUp', methods=['POST'])
 def UsersignUp():
     try:
@@ -92,6 +91,7 @@ def UsersignUp():
 
 @auth_bp.route('/signUp', methods=['POST'])
 def signUp():
+
     try:
      
         email = request.json["email"]
@@ -119,3 +119,35 @@ def signUp():
 
     except Exception as e:
         return "An internal error has occurred!"
+    
+#fetch all admins
+@auth_bp.route('/verify-admin', methods=['POST'])
+def fetchadmin():
+    try:
+        data = request.get_json()
+        email = data.get("email")
+
+        admins = Admin.query.all()
+
+        admin_list = [
+                {
+                    "id": admin.id,
+                    "email": admin.email,
+                    "username": admin.username,
+                    "role": admin.role
+                } for admin in admins
+        ]
+
+        if not any(admin['email'] == email for admin in admin_list):
+            return jsonify({"error": "Admin not found", "status": "fail"}), 404
+        else:
+            return jsonify({
+                "message": "Admin verified",
+                "status": "success"
+            }), 200
+
+            
+        
+    except Exception as e:
+        print(str(e))
+        return jsonify({"error": "Server error", "status": "fail"}), 500

@@ -8,6 +8,7 @@ import config from "../../config";
 
 const API_URL = config.API_URL;
 
+//this is for fetching images for the home page gallery at the bottom
 const fetchItem = () => {
   axios.get(`${API_URL}/main/get_image`)
     .then((response) => {
@@ -17,6 +18,8 @@ const fetchItem = () => {
       console.error('Error fetching items:', error);
     });
 };
+
+
 
 const addImage = (imageData) => {
   axios.post(`${API_URL}/main/upload_image`, imageData)
@@ -48,8 +51,23 @@ const handleEdit = () => {
   // Placeholder for edit functionality
 }
 
-const userEmail = localStorage.getItem("userEmail");
-console.log("Admin Email: ", userEmail);
+//this is for fething the admin email from session storage
+const fetchAdmin = () => {
+  axios.get(`${API_URL}/auth/fetchadmin`)
+    .then((response) => {
+      console.log(response.data);
+    })
+    .catch((error) => {
+      console.error('Error fetching admin email:', error);
+    });
+}
+
+const email = localStorage.getItem("userEmail");
+console.log("Admin Email:", email);
+
+
+
+
 
 
 const CompanyDescription = () => {
@@ -68,11 +86,11 @@ const CompanyDescription = () => {
 
 
 
-        {userEmail === "daffodilzone@gmail.com" && (
-          <button onClick={handleEdit} className="edit-button">
-            Edit
-          </button>
-        )}
+
+        <button onClick={handleEdit} className="edit-button">
+          Edit
+        </button>
+
 
 
         <div className="grid-item">
