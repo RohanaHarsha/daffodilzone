@@ -87,9 +87,6 @@ const Signup = () => {
   }, [email]);
 
 
-
-
-
   // ------------------- SIGN UP -------------------
   const handleSignUp = (e) => {
     e.preventDefault();
@@ -129,12 +126,13 @@ const Signup = () => {
       .finally(() => setLoading(false));
   };
 
+  // ------------------- VERIFY ADMIN -------------------
   const [isAdmin, setIsAdmin] = useState(false);
 
   const handleVerify = async () => {
     try {
       // Send the email captured from your UI to the Flask backend
-      const response = await axios.post(`${API_URL}/auth/verify-admin`, {
+      const response = await axios.post(`${API_URL}/auth/verify_admin`, {
         email: email
       });
 
@@ -151,12 +149,16 @@ const Signup = () => {
     }
   };
 
-  localStorage.setItem("isAdmin", isAdmin);
+  // Call handleVerify when email changes
+  useEffect(() => {
+    handleVerify();
+  }, [email]);
 
-  console.log("Is Admin:", isAdmin);
-
+  // Store isAdmin in sessionStorage and this has been called in the company_description page
+  sessionStorage.setItem("isAdmin", isAdmin);
 
   return (
+
 
     <div className="back">
       <Navbar />
@@ -252,7 +254,7 @@ const Signup = () => {
               <p className="p">
                 To keep connected with us please login with your personal info
               </p>
-              <button className="ghost" id="signIn" onClick={{togglePanel,handleVerify}}>
+              <button className="ghost" id="signIn" onClick={{ togglePanel, handleVerify }}>
                 Sign In
               </button>
             </div>

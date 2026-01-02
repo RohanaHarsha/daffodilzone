@@ -5,7 +5,7 @@ import Renovate3 from '../../img/Renovate3.jpg';
 import './CompanyDescription.css';
 import axios from 'axios';
 import config from "../../config";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const API_URL = config.API_URL;
 
@@ -54,17 +54,12 @@ const handleEdit = () => {
 
 //this is for fething and sending the admin email from session storage
 
-
-const email = localStorage.getItem("userEmail");
-console.log("Admin Email:", email);
-
-
-
-
-
-
 const CompanyDescription = () => {
- 
+  const admin_verification = sessionStorage.getItem("isAdmin");
+  console.log("Admin verification in company description:", admin_verification);
+
+
+
   return (
     <div className="company-description">
       <div className="description-text">
@@ -79,13 +74,13 @@ const CompanyDescription = () => {
         </div>
 
 
-
-
-        <button onClick={handleEdit} className="edit-button">
-          Edit
-        </button>
-
-
+        {admin_verification === "true" && (
+          <>
+            <button onClick={handleEdit} className="edit-button">
+              Edit
+            </button>
+          </>
+        )}
 
         <div className="grid-item">
           <img src={Renovate3} alt="Renovation 3" />

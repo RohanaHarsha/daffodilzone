@@ -120,7 +120,7 @@ def signUp():
     except Exception as e:
         return "An internal error has occurred!"
     
-#fetch all admins
+#fetch emails from signup page and verify if admin exists andsent a bool value upon calling
 @auth_bp.route('/verify_admin', methods=['POST'])
 def fetchadmin():
     try:

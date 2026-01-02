@@ -21,6 +21,7 @@ export default function Navbar() {
     sessionStorage.removeItem("user_email");
     sessionStorage.removeItem("userRole");
     sessionStorage.removeItem("username");
+    sessionStorage.removeItem("isAdmin");
     navigate("/login");
   };
 
