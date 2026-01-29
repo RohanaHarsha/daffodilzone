@@ -28,6 +28,7 @@ class TestLuxuryHouseUpload(unittest.TestCase):
         response = self.client.get("/", data=form_data)
         print(response)
         self.assertEqual(response.status_code, 200)
+<<<<<<< HEAD
 
     def test_get_admins (self):
         form_data = {
@@ -41,6 +42,9 @@ class TestLuxuryHouseUpload(unittest.TestCase):
         self.assertIn("isAdmin", data)
 
         self.assertTrue(data["isAdmin"])
+=======
+       # self.assertIn("Luxury house added successfully", response.get_json()["Havent recieded"])
+>>>>>>> 6c42d1a6c8329593f20f2007316d37275f0b411c
 
 
 if __name__ == "__main__":
