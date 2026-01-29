@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Signup.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -17,6 +17,8 @@ const Signup = () => {
   const [username, setUsername] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+
+
 
   const togglePanel = () => {
     setIsSignInActive(!isSignInActive);
@@ -72,7 +74,18 @@ const Signup = () => {
           alert("Login failed. Try again.");
         }
       });
+
+
   };
+
+
+  // ------------------- GET USER EMAIL -------------------
+  useEffect(() => {
+    if (email) {
+      localStorage.setItem("userEmail", email);
+    }
+  }, [email]);
+
 
   // ------------------- SIGN UP -------------------
   const handleSignUp = (e) => {
@@ -113,7 +126,40 @@ const Signup = () => {
       .finally(() => setLoading(false));
   };
 
+  // ------------------- VERIFY ADMIN -------------------
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  const handleVerify = async () => {
+    try {
+      // Send the email captured from your UI to the Flask backend
+      const response = await axios.post(`${API_URL}/auth/verify_admin`, {
+        email: email
+      });
+
+      // Update state based on the backend response
+      setIsAdmin(response.data.isAdmin);
+
+      if (response.data.isAdmin) {
+        alert("Access Granted");
+      } else {
+        alert("Access Denied");
+      }
+    } catch (error) {
+      console.error("Verification failed:", error);
+    }
+  };
+
+  // Call handleVerify when email changes
+  useEffect(() => {
+    handleVerify();
+  }, [email]);
+
+  // Store isAdmin in sessionStorage and this has been called in the company_description page
+  sessionStorage.setItem("isAdmin", isAdmin);
+
   return (
+
+
     <div className="back">
       <Navbar />
       <div
@@ -208,7 +254,7 @@ const Signup = () => {
               <p className="p">
                 To keep connected with us please login with your personal info
               </p>
-              <button className="ghost" id="signIn" onClick={togglePanel}>
+              <button className="ghost" id="signIn" onClick={{ togglePanel, handleVerify }}>
                 Sign In
               </button>
             </div>

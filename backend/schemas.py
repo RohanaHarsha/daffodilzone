@@ -94,3 +94,16 @@ class UserSchema(SQLAlchemyAutoSchema):
         model = User
         include_relationships = True
         load_instance = True
+
+
+#home page images and videos
+
+class HomePageVideoSchema(SQLAlchemyAutoSchema):
+    class Meta:
+        model = HomePageVideo
+        load_instance = True
+
+class HomePageImageSchema(SQLAlchemyAutoSchema):
+    class Meta:
+        model = HomePageImage
+        load_instance = True

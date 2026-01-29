@@ -29,6 +29,19 @@ class TestLuxuryHouseUpload(unittest.TestCase):
         print(response)
         self.assertEqual(response.status_code, 200)
 
+    def test_get_admins (self):
+        form_data = {
+            "email": "daffodilzone@gmail.com"
+        }
+       
+        response = self.client.post("auth/verify_admin", json=form_data)
+        self.assertEqual(response.status_code, 200)
+        data = response.get_json()
+        print(data)
+        self.assertIn("isAdmin", data)
+
+        self.assertTrue(data["isAdmin"])
+
 
 if __name__ == "__main__":
     unittest.main()
