@@ -10,16 +10,6 @@ import AddBannerForm from '../bannerAdd';
 import AddHouse from '../AddHouse';
 
 export default function Home() {
-    const [showBannerForm, setShowBannerForm] = useState(false);
-    const toggleBannerForm = () => setShowBannerForm(prev => !prev);
-
-    const [showHouseForm, setShowHouseForm] = useState(false);
-    const toggleHouseForm = () => setShowHouseForm(prev => !prev);
-
-
-    
-
-
 
     return (
         <div className="page-with-sidebar">
@@ -50,8 +40,8 @@ export default function Home() {
                         <LatestProjects />
 
                         {/* Conditional Forms */}
-                        {showBannerForm && <AddBannerForm />}
-                        {showHouseForm && <AddHouse />}
+                        <AddBannerForm />
+                        <AddHouse />
                     </div>
 
                     {/* Other Sections */}
