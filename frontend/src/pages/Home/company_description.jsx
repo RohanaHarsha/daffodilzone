@@ -74,13 +74,7 @@ const CompanyDescription = () => {
         </div>
 
 
-        {admin_verification === "true" && (
-          <>
-            <button onClick={handleEdit} className="edit-button">
-              Edit
-            </button>
-          </>
-        )}
+      
 
         <div className="grid-item">
           <img src={Renovate3} alt="Renovation 3" />
