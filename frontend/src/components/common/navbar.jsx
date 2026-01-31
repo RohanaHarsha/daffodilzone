@@ -10,7 +10,7 @@ export default function Navbar() {
   const sessionUserId = sessionStorage.getItem("userId");
   const sessionuser_email = sessionStorage.getItem("user_email");
   const sessionuserRole = sessionStorage.getItem("userRole");
-  const sessionuserName = sessionStorage.getItem("username");
+
 
   const handleLogout = () => {
     localStorage.removeItem("userId");
