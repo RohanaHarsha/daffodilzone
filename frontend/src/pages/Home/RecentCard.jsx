@@ -13,9 +13,7 @@ const DUMMY_HOUSES = [
     district: "Colombo",
     houseType: "Villa",
     keyWord: "Luxury 3BR villa with pool and garden",
-    images: [{ 
-      image1: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="800" height="500"%3E%3Cdefs%3E%3ClinearGradient id="g1" x1="0%25" y1="0%25" x2="0%25" y2="100%25"%3E%3Cstop offset="0%25" style="stop-color:%234f46e5;stop-opacity:1" /%3E%3Cstop offset="100%25" style="stop-color:%236366f1;stop-opacity:1" /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width="100%25" height="100%25" fill="url(%23g1)"/%3E%3Ctext x="50%25" y="40%25" dominant-baseline="middle" text-anchor="middle" fill="white" font-size="80" font-family="Arial"%3E🏡%3C/text%3E%3Ctext x="50%25" y="60%25" dominant-baseline="middle" text-anchor="middle" fill="white" font-size="28" font-weight="bold" font-family="Arial"%3ELuxury Villa%3C/text%3E%3Ctext x="50%25" y="70%25" dominant-baseline="middle" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="18" font-family="Arial"%3EColombo%3C/text%3E%3C/svg%3E'
-    }],
+    images: [{ image1: "https://picsum.photos/seed/villa1/800/500" }],
     isDummy: true
   },
   {
@@ -23,9 +21,7 @@ const DUMMY_HOUSES = [
     district: "Kandy",
     houseType: "Apartment",
     keyWord: "Modern 2BR apartment in city center",
-    images: [{ 
-      image1: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="800" height="500"%3E%3Cdefs%3E%3ClinearGradient id="g2" x1="0%25" y1="0%25" x2="0%25" y2="100%25"%3E%3Cstop offset="0%25" style="stop-color:%2310b981;stop-opacity:1" /%3E%3Cstop offset="100%25" style="stop-color:%2314b8a6;stop-opacity:1" /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width="100%25" height="100%25" fill="url(%23g2)"/%3E%3Ctext x="50%25" y="40%25" dominant-baseline="middle" text-anchor="middle" fill="white" font-size="80" font-family="Arial"%3E🏢%3C/text%3E%3Ctext x="50%25" y="60%25" dominant-baseline="middle" text-anchor="middle" fill="white" font-size="28" font-weight="bold" font-family="Arial"%3EModern Apartment%3C/text%3E%3Ctext x="50%25" y="70%25" dominant-baseline="middle" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="18" font-family="Arial"%3EKandy%3C/text%3E%3C/svg%3E'
-    }],
+    images: [{ image1: "https://picsum.photos/seed/apartment1/800/500" }],
     isDummy: true
   },
   {
@@ -33,9 +29,7 @@ const DUMMY_HOUSES = [
     district: "Galle",
     houseType: "Beach House",
     keyWord: "Beachfront property with ocean views",
-    images: [{ 
-      image1: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="800" height="500"%3E%3Cdefs%3E%3ClinearGradient id="g3" x1="0%25" y1="0%25" x2="0%25" y2="100%25"%3E%3Cstop offset="0%25" style="stop-color:%233b82f6;stop-opacity:1" /%3E%3Cstop offset="100%25" style="stop-color:%232563eb;stop-opacity:1" /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width="100%25" height="100%25" fill="url(%23g3)"/%3E%3Ctext x="50%25" y="40%25" dominant-baseline="middle" text-anchor="middle" fill="white" font-size="80" font-family="Arial"%3E🏖️%3C/text%3E%3Ctext x="50%25" y="60%25" dominant-baseline="middle" text-anchor="middle" fill="white" font-size="28" font-weight="bold" font-family="Arial"%3EBeach House%3C/text%3E%3Ctext x="50%25" y="70%25" dominant-baseline="middle" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="18" font-family="Arial"%3EGalle%3C/text%3E%3C/svg%3E'
-    }],
+    images: [{ image1: "https://picsum.photos/seed/beach1/800/500" }],
     isDummy: true
   },
   {
@@ -43,9 +37,7 @@ const DUMMY_HOUSES = [
     district: "Negombo",
     houseType: "House",
     keyWord: "Spacious 4BR family home near beach",
-    images: [{ 
-      image1: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="800" height="500"%3E%3Cdefs%3E%3ClinearGradient id="g4" x1="0%25" y1="0%25" x2="0%25" y2="100%25"%3E%3Cstop offset="0%25" style="stop-color:%23f59e0b;stop-opacity:1" /%3E%3Cstop offset="100%25" style="stop-color:%23f97316;stop-opacity:1" /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width="100%25" height="100%25" fill="url(%23g4)"/%3E%3Ctext x="50%25" y="40%25" dominant-baseline="middle" text-anchor="middle" fill="white" font-size="80" font-family="Arial"%3E🏠%3C/text%3E%3Ctext x="50%25" y="60%25" dominant-baseline="middle" text-anchor="middle" fill="white" font-size="28" font-weight="bold" font-family="Arial"%3EFamily Home%3C/text%3E%3Ctext x="50%25" y="70%25" dominant-baseline="middle" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="18" font-family="Arial"%3ENegombo%3C/text%3E%3C/svg%3E'
-    }],
+    images: [{ image1: "https://picsum.photos/seed/house1/800/500" }],
     isDummy: true
   },
   {
@@ -53,9 +45,7 @@ const DUMMY_HOUSES = [
     district: "Kurunegala",
     houseType: "Bungalow",
     keyWord: "Charming bungalow with large garden",
-    images: [{ 
-      image1: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="800" height="500"%3E%3Cdefs%3E%3ClinearGradient id="g5" x1="0%25" y1="0%25" x2="0%25" y2="100%25"%3E%3Cstop offset="0%25" style="stop-color:%238b5cf6;stop-opacity:1" /%3E%3Cstop offset="100%25" style="stop-color:%237c3aed;stop-opacity:1" /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width="100%25" height="100%25" fill="url(%23g5)"/%3E%3Ctext x="50%25" y="40%25" dominant-baseline="middle" text-anchor="middle" fill="white" font-size="80" font-family="Arial"%3E🏘️%3C/text%3E%3Ctext x="50%25" y="60%25" dominant-baseline="middle" text-anchor="middle" fill="white" font-size="28" font-weight="bold" font-family="Arial"%3EBungalow%3C/text%3E%3Ctext x="50%25" y="70%25" dominant-baseline="middle" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="18" font-family="Arial"%3EKurunegala%3C/text%3E%3C/svg%3E'
-    }],
+    images: [{ image1: "https://picsum.photos/seed/bungalow1/800/500" }],
     isDummy: true
   },
   {
@@ -63,12 +53,11 @@ const DUMMY_HOUSES = [
     district: "Jaffna",
     houseType: "Villa",
     keyWord: "Traditional villa with modern amenities",
-    images: [{ 
-      image1: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="800" height="500"%3E%3Cdefs%3E%3ClinearGradient id="g6" x1="0%25" y1="0%25" x2="0%25" y2="100%25"%3E%3Cstop offset="0%25" style="stop-color:%23ec4899;stop-opacity:1" /%3E%3Cstop offset="100%25" style="stop-color:%23db2777;stop-opacity:1" /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width="100%25" height="100%25" fill="url(%23g6)"/%3E%3Ctext x="50%25" y="40%25" dominant-baseline="middle" text-anchor="middle" fill="white" font-size="80" font-family="Arial"%3E🏛️%3C/text%3E%3Ctext x="50%25" y="60%25" dominant-baseline="middle" text-anchor="middle" fill="white" font-size="28" font-weight="bold" font-family="Arial"%3ETraditional Villa%3C/text%3E%3Ctext x="50%25" y="70%25" dominant-baseline="middle" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="18" font-family="Arial"%3EJaffna%3C/text%3E%3C/svg%3E'
-    }],
+    images: [{ image1: "https://picsum.photos/seed/villa2/800/500" }],
     isDummy: true
   }
-];
+]
+
 
 const RecentCard = () => {
   const [houses, setHouses] = React.useState(DUMMY_HOUSES);
